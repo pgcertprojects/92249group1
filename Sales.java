@@ -1,229 +1,127 @@
+//Sales.java
+
 package KwikNKleenCarWash;
 
-import GroovyMovies.Customer;
 
 import java.text.DecimalFormat;
 
 /**
- * Created by richard on 09/03/2021
- * UPDATE PROGRAM COMMENTS ABOUT PROGRAM HERE
- **/
-public class Sales
-{
+ *
+ */
+
+public class Sales {
+
+   // Get package lists, this is static so it can be used by all static methods and it is private since it is only used within this class
+   private static java.lang.Package[] Packages= PackagesList.getPackageArray();
+
    //static DecimalFormat to be accessed by any other method in the class
    private static DecimalFormat df = new DecimalFormat("###,###,##0.00");
 
-   //static variables
-   private static int service1counter, service2counter, service3counter, service4counter, service5counter, service6counter;
-   private static int item1counter, item2counter, item3counter, item4counter, item5counter, item6counter,
-           item7counter, item8counter, item9counter;
-   private static int totalPurchasesOfService, totalPurchasesOfItems, memberServiceCount, nonMemberServiceCount;
+   //These are the static variables that are used throughout the whole class
+   private static int totalPackagesSold, memberPackageCount, nonMemberPackageCount;
+   private static String Platinum, Gold, Silver, Bronze;
 
    protected static void menu() {
       System.out.println();
       System.out.println("======================");
       System.out.println("SALES MENU");
       System.out.println("======================");
-      Sales.printTodaysSales();
+      KwikNKleenCarWash.Sales.printTodaysSales();
       System.out.println();
-      Sales.printServiceSales();
-      Sales.printItemsSales();
+      KwikNKleenCarWash.Sales.printPackageSales();
       System.out.println();
-      Sales.printMemNonMemSales();
+      KwikNKleenCarWash.Sales.printMemNonMemSales();
       System.out.println();
    }//menu()
 
    protected static void printTodaysSales(){
-      System.out.println("Total amount of service sales today: ");
-      System.out.println(getTotalPurchasesOfService());
+      System.out.println("Total amount of package sales today: ");
+      System.out.println(getTotalPackagesSold());
       System.out.println();
       System.out.println("Total value of sales today:");
-      //System.out.println("£" + df.format(Customer.getOverallTotalSales()));
+      System.out.println("£" + df.format(Customer.getOverallTotalSales()));
    }//printTodaysSales()
 
-   protected static void totalPurchasesPerService(int inputServiceOption)
-   {
-      switch (inputServiceOption)
-      {
+   protected static void totalTicketsPerMovie(int inputPackagesOption, int inputNoOfPackages) {
+      switch (inputPackagesOption) {
          case 1:
-            service1counter++;
+            Platinum += inputNoOfPackages;
             break;
          case 2:
-            service2counter++;
+            Gold += inputNoOfPackages;
             break;
          case 3:
-            service3counter++;
+            Silver += inputNoOfPackages;
             break;
          case 4:
-            service4counter++;
+            Bronze += inputNoOfPackages;
             break;
-         case 5:
-            service5counter++;
-            break;
-         case 6:
-            service6counter++;
-            break;
-         //no default required as options 1-6 will always be passed through
-      }//switch
-      totalPurchasesOfService++;
-   }
 
-   protected static void totalPurchasesPerItem(int inputItemOption)
-   {
-      switch (inputItemOption)
-      {
-         case 1:
-            item1counter++;
-            break;
-         case 2:
-            item2counter++;
-            break;
-         case 3:
-            item3counter++;
-            break;
-         case 4:
-            item4counter++;
-            break;
-         case 5:
-            item5counter++;
-            break;
-         case 6:
-            item6counter++;
-            break;
-         case 7:
-            item7counter++;
-            break;
-         case 8:
-            item8counter++;
-            break;
-         case 9:
-            item9counter++;
-            break;
-         case 10:
-            break;
-         //no default required as options 1-10 will always be passed through
+         //No default option required as when it is called there is always data inputted
       }//switch
-      totalPurchasesOfItems++;
-   }//totalPurchasesPerItem
+      totalPackagesSold += inputNoOfPackages;
+   }//totalTicketsPerMovie
 
-   protected static void printServiceSales() {
+   protected static void printPackagesSales() {
       System.out.println("======================");
-      System.out.println("INDIVIDUAL SERVICE SALES");
+      System.out.println("INDIVIDUAL PACKAGE TICKET SALES");
       System.out.println("======================");
       System.out.println();
-      System.out.println("Total purchases for service 1");
-      System.out.println(Sales.getService1counter());
-      System.out.println("Total purchases for service 2");
-      System.out.println(Sales.getService2counter());
-      System.out.println("Total purchases for service 3");
-      System.out.println(Sales.getService3counter());
-      System.out.println("Total purchases for service 4");
-      System.out.println(Sales.getService4counter());
-      System.out.println("Total purchases for service 5");
-      System.out.println(Sales.getService5counter());
-      System.out.println("Total purchases for service 6");
-      System.out.println(Sales.getService6counter());
-   }//printServiceSales
+      System.out.println("Total amount of packages sold for " + Platinum[0].getPackageTitle());
+      System.out.println(KwikNKleenCarWash.Sales.getPackage1());
+      System.out.println("Total amount of packages sold for " + Gold[1].getPackageTitle());
+      System.out.println(KwikNKleenCarWash.Sales.getPackage2());
+      System.out.println("Total amount of packages sold for " + Silver[2].getPackageTitle());
+      System.out.println(KwikNKleenCarWash.Sales.getPackage3());
+      System.out.println("Total amount of packages sold for " + Bronze[3].getPackageTitle());
+      System.out.println(KwikNKleenCarWash.Sales.getPackage4());
 
-   protected static void printItemsSales() {
-      System.out.println("======================");
-      System.out.println("INDIVIDUAL ITEMS SALES");
-      System.out.println("======================");
-      System.out.println();
-      System.out.println("Total purchases for item 1");
-      System.out.println(Sales.getItem1counter());
-      System.out.println("Total purchases for item 2");
-      System.out.println(Sales.getItem2counter());
-      System.out.println("Total purchases for item 3");
-      System.out.println(Sales.getItem3counter());
-      System.out.println("Total purchases for item 4");
-      System.out.println(Sales.getItem4counter());
-      System.out.println("Total purchases for item 5");
-      System.out.println(Sales.getItem5counter());
-      System.out.println("Total purchases for item 6");
-      System.out.println(Sales.getItem6counter());
-      System.out.println("Total purchases for item 7");
-      System.out.println(Sales.getItem7counter());
-      System.out.println("Total purchases for item 8");
-      System.out.println(Sales.getItem8counter());
-      System.out.println("Total purchases for item 9");
-      System.out.println(Sales.getItem9counter());
-   }//printItemsSales()
+   }//printTicketSales()
 
    protected static void printMemNonMemSales() {
       System.out.println("======================");
-      System.out.println("MEMBER & NON-MEMBER TICKETS SOLD");
+      System.out.println("MEMBER & NON-MEMBER PACKAGES SOLD");
       System.out.println("======================");
-      System.out.println("Total amount of service sold for members: ");
-      System.out.println(Sales.getMemberServiceCount());
-      System.out.println("Total amount of services sold for non-members ");
-      System.out.println(Sales.getNonMemberServiceCount());
+      System.out.println("Total amount of packages sold for members: ");
+      System.out.println(KwikNKleenCarWash.Sales.getMemberPackageCount());
+      System.out.println("Total amount of packages sold for non-members ");
+      System.out.println(KwikNKleenCarWash.Sales.getNonMemberPackageCount());
       System.out.println("======================");
    }//printMemNonMemSales()
 
-   //Getters & setters
-      //services
-   protected static int getTotalPurchasesOfService() {
-      return totalPurchasesOfService;
-   }
+   //Getters & Setters
 
-   protected static int getService1counter() {
-      return service1counter;
-   }
-   protected static int getService2counter() {
-      return service2counter;
-   }
-   protected static int getService3counter() {
-      return service3counter;
-   }
-   protected static int getService4counter() {
-      return service4counter;
-   }
-   protected static int getService5counter() {
-      return service5counter;
-   }
-   protected static int getService6counter() {
-      return service6counter;
-   }
+   protected static int getMemberPackageCount() {
+      return memberPackageCount;
+   }//getMemberPackageCount
 
-      //items
-   protected static int getTotalPurchasesOfItems() { return totalPurchasesOfItems; }
+   protected static int getNonMemberPackageCount() {
+      return nonMemberPackageCount;
+   }//getNonMemberPackageCount
 
-   protected static int getItem1counter() { return item1counter; }
-   protected static int getItem2counter() {
-      return item2counter;
-   }
-   protected static int getItem3counter() {
-      return item3counter;
-   }
-   protected static int getItem4counter() {
-      return item4counter;
-   }
-   protected static int getItem5counter() {
-      return item5counter;
-   }
-   protected static int getItem6counter() { return item6counter; }
-   protected static int getItem7counter() {
-      return item7counter;
-   }
-   protected static int getItem8counter() {
-      return item8counter;
-   }
-   protected static int getItem9counter() {
-      return item9counter;
-   }
+   protected static int getTotalPackagesSold() {
+      return totalPackagesSold;
+   }//getTotalPackagesSold
 
-   protected static int getMemberServiceCount() {
-      return memberServiceCount;
-   }
-   protected static void setMemberServiceCount(int memberServiceCount) {
-      Sales.memberServiceCount += memberServiceCount;
-   }
+   protected static int getPackage1() { return package1;
+   }//getPackage1
 
-   protected static int getNonMemberServiceCount() {
-      return nonMemberServiceCount;
-   }
-   protected static void setNonMemberServiceCount(int nonMemberServiceCount) {
-      Sales.nonMemberServiceCount = +nonMemberServiceCount;
-   }
+   protected static int getPackage2() {return package2;
+   }//getPackage2
+
+   protected static int getPackage3() { return package3;
+   }//getPackage3
+
+   protected static int getPackage4() { return package4; }
+   //getPackage4
+
+
+   protected static void setMemberPackageCount(int memberPackageCount) {
+      Sales.memberPackageCount += memberPackageCount;
+   }//setMemberPackageCount
+
+   protected static void setNonMemberPackageCount(int nonMemberPackageCount) {
+      Sales.nonMemberPackageCount = +nonMemberPackageCount;
+
+   }//setNonMemberPackageCount
 }//class
