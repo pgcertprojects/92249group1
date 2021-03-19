@@ -1,7 +1,5 @@
 package Objects;
 
-import java.text.DecimalFormat;
-
 /**
  * Created by KwikNKleenCarWash on 23/02/2021
  * This is our MemberCustomer Class which inherits from the parent abstract Customer Class. Within this class contains
@@ -9,9 +7,6 @@ import java.text.DecimalFormat;
  **/
 
 public class MemberCustomer extends Customer{
-
-   //static DecimalFormat to be accessed by any other method in the class
-   static DecimalFormat df = new DecimalFormat("###,###,##0.00");
    
    //variables used within constructor methods
    private static final double MEMBERDISCOUNT = 0.25;
