@@ -1,10 +1,17 @@
 package Objects;
 
+/**
+ * Created by KwikNKleenCarWash on 23/02/2021
+ * This is our NonMemberCustomer Class which inherits from the parent abstract Customer Class. Within this class contains
+ * NonMember discount which is applied when the Platinum package is purchased.
+ **/
+
 public class NonMemberCustomer extends Customer{
 
    //variables used within constructor methods
-   private static double nonMemberDiscount = 0.10;
-
+   private static final double NONMEMBERDISCOUNT = 0.10;
+   private static double endPrice;
+   
    //Counter for NonMemberCustomers
    public static int noOfNonMemberCustomers = 0;
 
@@ -20,11 +27,13 @@ public class NonMemberCustomer extends Customer{
       super(name, aPackage, price);
 
       //Apply a 10% discount if NonMemberCustomer chooses a Platinum package
-      if(aPackage == "Platinum"){
-         price = memberDiscountPrice(price);
-      }
-
-      //using noOfNonMemberCustomers variable to increment by 1 each time object is created, and is used for analytic purposes
+      if(aPackage.equals("Platinum")){
+         endPrice = nonMemberDiscountPrice(price);
+      }//if
+      else {
+         endPrice = price;
+      }//else
+      //variable incremented by 1, used for analytic purposes
       noOfNonMemberCustomers++;
    }//NonMemberCustomer
 
@@ -37,10 +46,10 @@ public class NonMemberCustomer extends Customer{
 
    //Method to output nonmember details of purchase to console
    public void printCustomerInfo(){
-      System.out.println("CUSTOMER RECEIPT: ");
-      System.out.println("Name: " + getCustomerName());
-      System.out.println("Package purchased: " + getPackageType() + " £" + getPackagePrice());
-      System.out.println("Total cost: £" + df.format(getTotalCost()));
+      System.out.println("CUSTOMER RECEIPT:");
+      System.out.println("Name:\t" + getCustomerName());
+      System.out.println("Package purchased:\t" + getPackageType() + " £" + df.format(getPackagePrice()));
+      System.out.println("Total cost:\t£" + df.format(endPrice));
    }//printCustomerInfo()
 
 
