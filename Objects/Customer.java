@@ -11,14 +11,16 @@ import java.text.DecimalFormat;
 
 public abstract class Customer
 {
-   static DecimalFormat df = new DecimalFormat("###,###,##0.00");    //to amend output of ticketTotalCost
+   static DecimalFormat df = new DecimalFormat("###,###,##0.00");    //to amend output of cost
 
    //variables used for constructors
    private String customerName;
    private String packageType;
    private double packagePrice;
 
-   //Variable used to count the total number of customers that are purchasing items
+    public double totalCost; //Total value of service purchased
+   
+   //Variable used to count the total number of customers that are purchasing
    private static int totalNoOfCustomers = 0;
 
 
@@ -32,6 +34,7 @@ public abstract class Customer
       customerName = name;
       packageType = aPackage;
       packagePrice = price;
+      //totalCost = CustomerMenu.getTotalCost();
    }//Customer
 
    //Getters and Setters
@@ -74,6 +77,11 @@ public abstract class Customer
    public void setTotalCost(double totalCost) {
       this.packagePrice = totalCost;
    }
+   
+   //Used to return the total sales value
+   //public static double getOverallTotalSales(){
+   //   return overallTotalSales;
+   //}//getOverallTotalSales()
 
    //Method to print out customer info
    public String toString() {
@@ -81,7 +89,7 @@ public abstract class Customer
               "\nCUSTOMER RECEIPT:  \n" +
                       "Name: " + customerName + "\n" +
                       "Package & cost:" + this.getPackageType() + " £" + this.getPackagePrice() +
-                      "Total cost:        £" + df.format(getTotalCost());
+                   //   "Total cost:        £" + df.format(getTotalCost());
 
    }//toString
 
