@@ -6,9 +6,10 @@ import Objects.Package;
 import java.text.DecimalFormat;
 
 /**
- * Created by richard on 09/03/2021
- * UPDATE PROGRAM COMMENTS ABOUT PROGRAM HERE
+ * Created by KwikNKleenCarWash on 09/03/2021
+ * Used get & calculate sales data such as individual purchases made by Members and NonMembers per package.
  **/
+
 public class Sales
 {
    private static Objects.Package[] Package = PackageList.getPackageArray();
@@ -37,6 +38,7 @@ public class Sales
       System.out.println("Total amount of service sales today: ");
       System.out.println(getTotalPurchasesOfPackages());
       System.out.println();
+      //Method to determine the total revenue made
       //System.out.println("Total value of sales today:");
       //System.out.println("£" + df.format(Customer.getOverallTotalSales()));
    }//printTodaysSales()
@@ -57,17 +59,17 @@ public class Sales
          case 4:
             bronzeCounter++;
             break;
-         //no default required as options 1-6 will always be passed through
+         //no default required as options 1-4 will always be passed through
       }//switch
       totalPurchasesOfPackages++;
    }//totalPurchasesPerPackage
 
    protected static void printServiceSales() {
       System.out.println("======================");
-      System.out.println("INDIVIDUAL SERVICE SALES");
+      System.out.println("INDIVIDUAL PACKAGE SALES");
       System.out.println("======================");
       System.out.println();
-      System.out.println("Total purchases for " + Package[0].getPackageName()); /**This Package before Package[0] might be wrong get it double checked.*/
+      System.out.println("Total purchases for " + Package[0].getPackageName());
       System.out.println(Sales.getPlatinumCounter());
       System.out.println("Total purchases for " + Package[1].getPackageName());
       System.out.println(Sales.getGoldCounter());
@@ -110,14 +112,14 @@ public class Sales
    protected static int getMemberPackageCount() {
       return memberPackageCount;
    }
-   protected static void setMemberPackageCount(int memberPackageCount) {
-      Sales.memberPackageCount += memberPackageCount;
+   protected static void incrementMemberPackageCount() {
+      Sales.memberPackageCount += 1;
    }
 
    protected static int getNonMemberPackageCount() {
       return nonMemberPackageCount;
    }
-   protected static void setNonMemberPackageCount(int nonMemberPackageCount) {
-      Sales.nonMemberPackageCount = +nonMemberPackageCount;
+   protected static void incrementNonMemberPackageCount() {
+      Sales.nonMemberPackageCount += 1;
    }
 }//class
