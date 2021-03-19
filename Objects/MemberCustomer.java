@@ -1,13 +1,24 @@
 package Objects;
 
+import java.text.DecimalFormat;
+
+/**
+ * Created by KwikNKleenCarWash on 23/02/2021
+ * This is our MemberCustomer Class which inherits from the parent abstract Customer Class. Within this class contains
+ * Member discount which is applied regardless of which package is purchased.
+ **/
+
 public class MemberCustomer extends Customer{
 
+   //static DecimalFormat to be accessed by any other method in the class
+   static DecimalFormat df = new DecimalFormat("###,###,##0.00");
+   
    //variables used within constructor methods
-   private static double memberDiscount = 0.25;
+   private static final double MEMBERDISCOUNT = 0.25;
+   private static double discountedPrice;
 
    //Counter for MemberCustomers
    public static int noOfMemberCustomers = 0;
-
 
    //Constructors
    public MemberCustomer(){
@@ -15,22 +26,24 @@ public class MemberCustomer extends Customer{
    }//default constructor
 
    public MemberCustomer (String name, String aPackage, double price){
-      super(name, aPackage, memberDiscountPrice(price));
+      super(name, aPackage,price);
+      discountedPrice = memberDiscountPrice(price);
       noOfMemberCustomers++;
    }
 
    //Method to calculate the Member discounted price
    public static double memberDiscountPrice(double price){
-      double discountedPrice = price - (price * memberDiscount);
+      double discountedPrice = price - (price * MEMBERDISCOUNT);
       return discountedPrice;
    }
 
    //Method to output member details of purchase to console
    public void printCustomerInfo(){
-      System.out.println("CUSTOMER RECEIPT: ");
-      System.out.println("Name: " + getCustomerName());
-      System.out.println("Package purchased: " + getPackageType() + " £" + getPackagePrice());
-      System.out.println("Total cost: £" + df.format(getTotalCost()));
+      System.out.println("CUSTOMER RECEIPT:");
+      System.out.println("Name:\t" + getCustomerName());
+      System.out.println("Package purchased:\t" + getPackageType() + " £" + df.format(getPackagePrice()));
+      System.out.println("Total cost:\t£" + df.format(discountedPrice));
+      System.out.println("================================\n");
    }//printCustomerInfo()
 
    //Getters
