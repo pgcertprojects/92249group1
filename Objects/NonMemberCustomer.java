@@ -39,7 +39,7 @@ public class NonMemberCustomer extends Customer{
 
 
    //Method to calculate the NonMember discounted price if applicable
-   public static double memberDiscountPrice(double price){
+   public static double nonMemberDiscountPrice(double price){
       double discountedPrice = price - (price * NONMEMBERDISCOUNT);
       return discountedPrice;
    }
