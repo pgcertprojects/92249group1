@@ -39,6 +39,9 @@ public class CustomerMenu
          if (member == 'Y' || member == 'N') {
             isChoiceValid = true;
          }//if
+         else{
+             System.out.print("Invalid choice, please try again. ");
+         }
       }while(!isChoiceValid);
 
       System.out.println();
