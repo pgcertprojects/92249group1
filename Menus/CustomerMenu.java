@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class CustomerMenu
 {
    private static DecimalFormat df = new DecimalFormat("00.00");
-   private static Scanner kb6 = new Scanner(System.in);
+   private static Scanner kb = new Scanner(System.in);
 
    private static int packageOption;
    private static String customerName = "", packageChoice = "";
@@ -31,17 +31,17 @@ public class CustomerMenu
       //Variables assigned to pass through constructor parameters to build Customer objects
       boolean isChoiceValid = false;
       System.out.println("Please enter your Name: ");
-      customerName = kb6.next();
+      customerName = kb.next();
       //do while loop to ensure a binary response for membership
       do{
          System.out.println("Are you a member (Y/N): ");
-         member = kb6.next().toUpperCase().charAt(0);
+         member = kb.next().toUpperCase().charAt(0);
          if (member == 'Y' || member == 'N') {
             isChoiceValid = true;
          }//if
          else{
              System.out.print("Invalid choice, please try again. ");
-         }
+         }//else
       }while(!isChoiceValid);
 
       System.out.println();
@@ -56,8 +56,22 @@ public class CustomerMenu
             System.out.println(num + ". " + packages[count].getPackageName() + " £" + df.format(packages[count].getPrice()) );
          }//for
 
-         System.out.println("Enter the number of the package you wish to purchase: ");
-         packageOption = kb6.nextInt();
+         System.out.println();
+
+         boolean validInput = false;
+         do
+         {
+            System.out.println("Enter the number of the package you wish to purchase: ");
+            char input = kb6.next().charAt(0);
+            if (Character.isDigit(input)) {
+               validInput = true;
+               packageOption = Character.getNumericValue(input);
+            }
+            else {
+               System.out.print("Invalid input, please enter a number.\n\n");
+            }
+         }while(!validInput);
+
          //assigns whatever option you use to our movieOption variable
          switch (packageOption) {
             case 1:
@@ -73,12 +87,12 @@ public class CustomerMenu
                packageChoice = packages[3].getPackageName();
                break;
             default:
-               System.out.println("\"" + packageOption + "\"" + " is not a valid choice");
+               System.out.println("Sorry, \"" + packageOption + "\"" + " is not one of our options.\nPlease see below:\n");
          }//switch
       }//do
       while ((packageOption < 1) || (packageOption > 4));
       
-      System.out.println("The package you have chosen is : " + packageChoice + "\n======================\n");
+      System.out.println("The package you have chosen is : " + packageOption + ". " + packageChoice + "\n======================\n");
       Sales.totalPurchasesPerPackage(packageOption);
 
       //If statement used to create Member or NonMember objects based on choice selection from menu above
