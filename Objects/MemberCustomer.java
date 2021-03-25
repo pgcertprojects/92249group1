@@ -22,14 +22,8 @@ public class MemberCustomer extends Customer{
 
    public MemberCustomer (String name, String aPackage, double price){
       super(name, aPackage,price);
-      discountedPrice = memberDiscountPrice(price);
+      discountedPrice = applyDiscount(price, MEMBERDISCOUNT);
       noOfMemberCustomers++;
-   }
-
-   //Method to calculate the Member discounted price
-   public static double memberDiscountPrice(double price){
-      double discountedPrice = price - (price * MEMBERDISCOUNT);
-      return discountedPrice;
    }
 
    //Method to output member details of purchase to console
