@@ -18,7 +18,7 @@ public abstract class Customer
    private String packageType;
    private double packagePrice;
 
-    public double totalCost; //Total value of service purchased
+   //public double totalCost; //Total value of service purchased
    
    //Variable used to count the total number of customers that are purchasing
    private static int totalNoOfCustomers = 0;
@@ -35,8 +35,14 @@ public abstract class Customer
       packageType = aPackage;
       packagePrice = price;
       //totalCost = CustomerMenu.getTotalCost();
+      totalNoOfCustomers++;
    }//Customer
 
+   //Method to calculate the discounted price for both Members and NonMembers
+   protected double applyDiscount(double price, double discount) {
+      return price - (price * discount);
+   }
+   
    //Getters and Setters
    public String getCustomerName() {
       return customerName;
@@ -70,13 +76,13 @@ public abstract class Customer
       Customer.totalNoOfCustomers = totalNoOfCustomers;
    }
 
-   public double getTotalCost() {
-      return packagePrice;
-   }
+   //public double getTotalCost() {
+   //  return packagePrice;
+   //}
 
-   public void setTotalCost(double totalCost) {
-      this.packagePrice = totalCost;
-   }
+   //public void setTotalCost(double totalCost) {
+   //   this.packagePrice = totalCost;
+   //}
    
    //Used to return the total sales value
    //public static double getOverallTotalSales(){
