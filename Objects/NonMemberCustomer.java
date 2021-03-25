@@ -28,7 +28,7 @@ public class NonMemberCustomer extends Customer{
 
       //Apply a 10% discount if NonMemberCustomer chooses a Platinum package
       if(aPackage.equals("Platinum")){
-         endPrice = nonMemberDiscountPrice(price);
+         endPrice = applyDiscount(price, NONMEMBERDISCOUNT);
       }//if
       else {
          endPrice = price;
@@ -36,13 +36,6 @@ public class NonMemberCustomer extends Customer{
       //variable incremented by 1, used for analytic purposes
       noOfNonMemberCustomers++;
    }//NonMemberCustomer
-
-
-   //Method to calculate the NonMember discounted price if applicable
-   public static double nonMemberDiscountPrice(double price){
-      double discountedPrice = price - (price * NONMEMBERDISCOUNT);
-      return discountedPrice;
-   }
 
    //Method to output nonmember details of purchase to console
    public void printCustomerInfo(){
